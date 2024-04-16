@@ -345,8 +345,8 @@ jobs:
         echo "Run ID: ${{ github.run_id }}"; \
 
         # Build the ROM
-        lunch ${{ github.event.inputs.PRODUCT_NAME }}-${{ github.event.inputs.BUILD_TYPE }} && \
-        make installclean && \
+        breakfast ${{ github.event.inputs.PRODUCT_NAME }} && \
+        croot && make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
       timeout-minutes: 720  
       
