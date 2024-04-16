@@ -262,8 +262,8 @@ jobs:
       # Generate 'git' credential in base of the workflow's author.
     - name: Set-up 'git' credential(s)
       run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+        git config --global user.name "Hadad"
+        git config --global user.email "hadad@linuxmail.org"
       
       # Download and configure 'crave'.
     - name: Configure the 'crave' environment
@@ -337,8 +337,8 @@ jobs:
         /opt/crave/resync.sh  && \
         
         # Set up build environment
-        export BUILD_USERNAME=${{ github.actor }} ; \
-        export BUILD_HOSTNAME=crave ; \
+        export BUILD_USERNAME=hadad ; \
+        export BUILD_HOSTNAME=android-build-system ; \
         source build/envsetup.sh && \
 
         echo "Repository: ${{ github.repository }}"; \
@@ -346,7 +346,7 @@ jobs:
 
         # Build the ROM
         breakfast ${{ github.event.inputs.PRODUCT_NAME }} && \
-        croot && make installclean && \
+        make installclean && croot && make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
       timeout-minutes: 720  
       
