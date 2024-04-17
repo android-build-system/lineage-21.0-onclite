@@ -262,8 +262,8 @@ jobs:
       # Generate 'git' credential in base of the workflow's author.
     - name: Set-up 'git' credential(s)
       run: |
-        git config --global user.name "Hadad"
-        git config --global user.email "hadad@linuxmail.org"
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
       
       # Download and configure 'crave'.
     - name: Configure the 'crave' environment
