@@ -21,7 +21,7 @@ on:
           - 'ArrowOS 13.1'
           - 'DerpFest 13.0'
           - 'CipherOS 14'
-      BUILD_DIFFERENT_ROM skip:
+      BUILD_DIFFERENT_ROM:
         description: "Command to initialize a different 'repo' project:"
         required: false
         default: "echo 'Build Starting!'"
@@ -31,23 +31,23 @@ on:
       LOCAL_MANIFEST:
         description: "Personal local manifest [repository or raw]:"
         required: true
-        default: 'https://github.com/sounddrill31/local_manifests'
+        default: 'https://gitlab.com/hdrjt/local_manifest'
       LOCAL_MANIFEST_BRANCH:
         description: "Personal local manifest's branch:"
         required: false
-        default: 'lineage-oxygen'
+        default: 'master'
       DEVICE_NAME:
         description: "Device's codename:"
         required: true
-        default: "oxygen"
+        default: "onclite"
       PRODUCT_NAME:
         description: "Product to build:"
         required: true
-        default: "lineage_oxygen"
+        default: "onclite"
       BUILD_COMMAND:
         description: 'Command to be used for compiling:'
         required: true
-        default: 'mka bacon'
+        default: 'm bacon -j8'
       BUILD_TYPE:
         description: 'Type of build:'
         required: true
