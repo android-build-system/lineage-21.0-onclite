@@ -21,7 +21,7 @@ on:
           - 'ArrowOS 13.1'
           - 'DerpFest 13.0'
           - 'CipherOS 14'
-      skip BUILD_DIFFERENT_ROM:
+      BUILD_DIFFERENT_ROM skip:
         description: "Command to initialize a different 'repo' project:"
         required: false
         default: "echo 'Build Starting!'"
