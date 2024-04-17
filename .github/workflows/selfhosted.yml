@@ -187,6 +187,16 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
+      # Send Build 'start' notification
+    - name: Telegram Notification
+      continue-on-error: true
+      uses: xinthink/action-telegram@v1.1
+      with:
+        chatId: ${{ secrets.TELEGRAM_TO }}
+        botToken: ${{ secrets.TELEGRAM_TOKEN }}
+        jobStatus: "Build Started"
+        skipSuccess: false
+
     - name: Cleanup
       run: rm -rf * # This cleans github actions workspace
 
@@ -280,7 +290,7 @@ jobs:
           cp crave.conf $PROJECTFOLDER 
         fi
         if [[ -z "${{ secrets.CUSTOM_YAML }}" ]]; then
-          cp crave.yaml $PROJECTFOLDER/.repo/manifests
+          cp yamls/crave.yaml.aosp $PROJECTFOLDER/.repo/manifests/crave.yaml
           echo "No Custom Configuration Found, Using Template!"
         else
           touch $PROJECTFOLDER/.repo/manifests/crave.yaml || true
@@ -348,8 +358,19 @@ jobs:
         breakfast ${{ github.event.inputs.PRODUCT_NAME }} && \
         make installclean && croot && make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
-      timeout-minutes: 720  
-      
+      timeout-minutes: 720
+
+      # Send Build 'status' notification
+    - name: Telegram Notification
+      if:  ${{ success()  || cancelled() || failure() }}
+      continue-on-error: true
+      uses: xinthink/action-telegram@v1.1
+      with:
+        chatId: ${{ secrets.TELEGRAM_TO }}
+        botToken: ${{ secrets.TELEGRAM_TOKEN }}
+        jobStatus: ${{ job.status }}
+        skipSuccess: false
+
       # Only reach this wheter the user killed the workflow.
     - name: Execute if the job is cancelled
       if: ${{ cancelled() }}
