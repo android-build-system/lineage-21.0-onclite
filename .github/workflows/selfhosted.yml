@@ -47,7 +47,7 @@ on:
       BUILD_COMMAND:
         description: 'Command to be used for compiling:'
         required: true
-        default: 'm bacon -j8'
+        default: 'm bacon'
       BUILD_TYPE:
         description: 'Type of build:'
         required: true
