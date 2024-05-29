@@ -387,7 +387,11 @@ jobs:
         
         # Sync the repositories
         /opt/crave/resync.sh  && \
-        
+
+        # Signed Build
+        export SIGNING_PREFERENCE=true ; \
+        curl https://raw.githubusercontent.com/sounddrill31/crave_aosp_builder/signing/scripts/signing-script.sh | bash ; \
+
         # Set up build environment
         export BUILD_USERNAME=hadad ; \
         export BUILD_HOSTNAME=android-build-system ; \
@@ -396,6 +400,7 @@ jobs:
         echo "Repository: ${{ github.repository }}"; \
         echo "Run ID: ${{ github.run_id }}"; \
 
+        # Setup Git LFS
         repo forall -c 'git lfs install && git lfs pull && git lfs checkout' ; \
 
         # Build the ROM
