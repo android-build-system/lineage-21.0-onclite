@@ -396,6 +396,8 @@ jobs:
         echo "Repository: ${{ github.repository }}"; \
         echo "Run ID: ${{ github.run_id }}"; \
 
+        repo forall -c 'git lfs install && git lfs pull && git lfs checkout' ; \
+
         # Build the ROM
         breakfast ${{ github.event.inputs.PRODUCT_NAME }} && \
         make installclean && croot && make installclean && \
