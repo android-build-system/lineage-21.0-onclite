@@ -52,7 +52,7 @@ on:
       BUILD_COMMAND:
         description: 'Command to be used for compiling:'
         required: true
-        default: 'onclite'
+        default: 'mka target-files-package otatools; /opt/crave/crave_sign.sh'
       BUILD_TYPE:
         description: 'Type of build:'
         required: true
