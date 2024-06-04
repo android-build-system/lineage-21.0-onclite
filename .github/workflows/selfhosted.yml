@@ -429,12 +429,16 @@ jobs:
         export BUILD_HOSTNAME=android-build-system ; \
         export KBUILD_BUILD_HOST=android-build-system ; \
         export TZ=Asia/Jakarta ; \
+
+        # Setup Git LFS
+        repo forall -c 'git lfs install && git lfs pull && git lfs checkout' ; \
+
+        # Building
         source build/envsetup.sh && \
 
         echo "Repository: ${{ github.repository }}"; \
         echo "Run ID: ${{ github.run_id }}"; \
 
-        # Build the ROM
         $LUNCH && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
