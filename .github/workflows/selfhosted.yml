@@ -433,10 +433,7 @@ jobs:
         
         # Set up build environment
         export BUILD_USERNAME=hadad ; \
-        export KBUILD_BUILD_USER=hadad ; \
         export BUILD_HOSTNAME=android-build-system ; \
-        export KBUILD_BUILD_HOST=android-build-system ; \
-        export TZ=Asia/Jakarta ; \
 
         # Setup Git LFS
         repo forall -c 'git lfs install && git lfs pull && git lfs checkout' ; \
@@ -447,7 +444,7 @@ jobs:
         echo "Repository: ${{ github.repository }}"; \
         echo "Run ID: ${{ github.run_id }}"; \
 
-        $LUNCH && \
+        $LUNCH && croot && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
       timeout-minutes: 720
