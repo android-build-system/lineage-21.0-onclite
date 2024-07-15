@@ -19,7 +19,7 @@ on:
           - 'LineageOS 20.0'
           - 'LineageOS 21.0'
           - 'ArrowOS 13.1'
-          - 'DerpFest 13.0'
+          - 'DerpFest 14.0'
           - 'CipherOS 14'
           - 'PixelOS 14'
           - 'RisingOS 14'
@@ -124,10 +124,10 @@ jobs:
           export PROJECTID="73"
           export REPO_INIT="repo init -u https://github.com/ArrowOS/android_manifest.git -b arrow-13.1 --depth=1"
         ;;
-        "DerpFest 13.0")
-          export PROJECTFOLDER="/crave-devspaces/DerpFest13"
+        "DerpFest 14.0")
+          export PROJECTFOLDER="/crave-devspaces/DerpFest14"
           export PROJECTID="64"
-          export REPO_INIT="repo init -u https://github.com/DerpFest-AOSP/manifest.git -b 13 --depth=1"
+          export REPO_INIT="repo init -u https://github.com/DerpFest-AOSP/manifest.git -b 14 --depth=1"
         ;;
         "LineageOS 21.0")
           export PROJECTFOLDER="/crave-devspaces/Lineage21"
@@ -285,7 +285,7 @@ jobs:
       LUNCH: ${{ needs.prepare.outputs.LUNCH }}
 
   build:
-    timeout-minutes: 720      
+    timeout-minutes: 960      
     name: Build using foss.crave.io
     needs: test 
     runs-on: self-hosted
@@ -343,7 +343,7 @@ jobs:
         if grep -q "$PROJECTFOLDER" <(crave clone list --json | jq -r '.clones[]."Cloned At"') && [ "${DCDEVSPACE}" == "1" ]; then
           crave clone destroy -y $PROJECTFOLDER || echo "Error removing $PROJECTFOLDER"
         else          
-        rm -rf $PROJECTFOLDER || true
+        echo "Skipping removal"
         fi
 
         if [ "${DCDEVSPACE}" == "1" ]; then
@@ -457,7 +457,7 @@ jobs:
         $LUNCH && croot && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
-      timeout-minutes: 720
+      timeout-minutes: 960
 
       # Send Build 'status' notification
     - name: Telegram Notification
@@ -522,5 +522,5 @@ jobs:
         if grep -q "$PROJECTFOLDER" <(crave clone list --json | jq -r '.clones[]."Cloned At"') && [ "${DCDEVSPACE}" == "1" ]; then
           crave clone destroy -y $PROJECTFOLDER || echo "Error removing $PROJECTFOLDER"
         else          
-          rm -rf $PROJECTFOLDER || true
+          echo "Skipping removal"
         fi
