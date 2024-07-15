@@ -285,7 +285,7 @@ jobs:
       LUNCH: ${{ needs.prepare.outputs.LUNCH }}
 
   build:
-    timeout-minutes: 960      
+    timeout-minutes: 2880      
     name: Build using foss.crave.io
     needs: test 
     runs-on: self-hosted
@@ -457,7 +457,7 @@ jobs:
         $LUNCH && croot && \
         make installclean && \
         ${{ github.event.inputs.BUILD_COMMAND }}"
-      timeout-minutes: 960
+      timeout-minutes: 2880
 
       # Send Build 'status' notification
     - name: Telegram Notification
