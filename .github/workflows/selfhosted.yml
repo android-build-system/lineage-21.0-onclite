@@ -132,7 +132,7 @@ jobs:
         "LineageOS 21.0")
           export PROJECTFOLDER="/crave-devspaces/Lineage21"
           export PROJECTID="72"
-          export REPO_INIT="repo init -u https://github.com/android-build-system/android_manifest_upstream.git -b lineage-21.0 --git-lfs --depth=1"
+          export REPO_INIT="repo init -u https://github.com/LineageOS/android.git -b lineage-21.0 --git-lfs --depth=1"
         ;;
         "LineageOS 20.0")
           export PROJECTFOLDER="/crave-devspaces/Lineage20"
